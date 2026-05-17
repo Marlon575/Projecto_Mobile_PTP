@@ -1,0 +1,27 @@
+# Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
+# Dependencies
+node_modules/
+
+# Expo
+.expo/
+dist/
+web-build/
+
+# Environment variables
+.env
+.env.local
+
+# uploads (PDFs dos utilizadores)
+model/uploads/resumos/
+
+# Build
+*.apk
+*.aab
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
