@@ -1,1 +1,1 @@
-# Projecto_Mobile_PTP1_Grupo-3hh
+# Projecto_Mobile_PTP1
