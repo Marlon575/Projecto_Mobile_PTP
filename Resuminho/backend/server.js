@@ -1,6 +1,6 @@
 const express = require('express');
-const cors = require ('cors');
-const dotenv = require ('dotenv');
+const cors = require('cors');
+const dotenv = require('dotenv');
 const ligarBD = require('./model/config/database');
 
 dotenv.config();
@@ -16,13 +16,13 @@ app.use('/admin', adminRoutes);
 
 // Rota de teste
 app.get('/', (req, res) => {
-res.json({ mensagem: 'Servidor Resuminho a funcionar!' });
+  res.json({ mensagem: 'Servidor Resuminho a funcionar!' });
 });
 
 const PORT = process.env.PORT || 3000;
 
 ligarBD().then(() => {
-app.listen(PORT, () => {
+  app.listen(PORT, () => {
     console.log(`Servidor a correr na porta ${PORT}`);
-});
+  });
 });
