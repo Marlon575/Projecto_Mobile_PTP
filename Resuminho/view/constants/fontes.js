@@ -1,6 +1,6 @@
 const fontes = {
   // Tamanhos de texto
-  pequeno: 11,        // legendas, badges
+  pequeno: 11,        // legendas 
   normal: 13,         // texto corrido
   medio: 15,          // texto destacado
   grande: 17,         // títulos de secção
