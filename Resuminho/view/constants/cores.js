@@ -5,12 +5,12 @@ const cores = {
   destaque: '#FF9800',        // laranja — estrelas e pontos
 
   // Fundos
-  fundo: '#F5F5F5',           // fundo geral da app
+  fundo: '#f5f5f5',           // fundo geral da app
   fundoCartao: '#FFFFFF',     // fundo dos cards
   fundoEscuro: '#121212',     // fundo modo escuro
 
   // Texto
-  textoPrimario: '#212121',   // texto principal
+  textoPrimario: '#d20000',   // texto principal
   textoSecundario: '#757575', // texto secundário
   textoClaro: '#FFFFFF',      // texto sobre fundos escuros
   textoDesativado: '#BDBDBD', // texto desativado
