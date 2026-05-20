@@ -50,11 +50,11 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   button: {
-    backgroundColor: "#4F46E5",
+    backgroundColor: "#4b0073",
     padding: 14,
     borderRadius: 8,
     marginTop: 10,
   },
   buttonText: { color: "#fff", textAlign: "center", fontWeight: "bold" },
-  link: { marginTop: 15, color: "#4F46E5", textAlign: "center" },
+  link: { marginTop: 15, color: "#4b007a", textAlign: "center" },
 });
