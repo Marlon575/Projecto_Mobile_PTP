@@ -1,7 +1,7 @@
 // Barra de tabs na parte inferior do ecrã
 // Adapta-se automaticamente ao tipo de utilizador estudante ou revisor
 
-import React, {use, useContext} from "react";
+import React, {useContext} from "react";
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 //Cria a barra de navegacao na parte de baixo do ecra
@@ -12,7 +12,7 @@ import {Ionicons} from '@expo/vector-icons';
 import{AuthContext} from '../../viewmodel/context/AuthContext';
 
 //Ecra do estudante
-import homeEstudanteScreen from '../screens/estudante/HomeEstudantesScreen';
+import HomeEstudanteScreen from '../screens/estudante/HomeEstudanteScreen';
 import PesquisarScreen from '../screens/estudante/PesquisarScreen';
 import PerfilScreen from '../screens/estudante/PerfilScreen';
 

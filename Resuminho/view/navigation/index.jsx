@@ -7,12 +7,13 @@ import {NavigationContainer} from '@react-navigation/native';
 import {AuthContext} from '../../viewmodel/context/AuthContext'
 // AuthContext guarda os dados do utilizador que entrou na sessão
 
-import AuthNavigador from './AdminNavigator'
+import AuthNavigador from './AuthNavigator';
 // Navigator para utilizadores NÃO autenticados (Login, Registo)
 
 import EstudanteNavigator from './EstudanteNavigator';
 import RevisorNavigator from './RevisorNavigator';
 import AdminNavigator from './AdminNavigator';
+import AuthNavigator from './AuthNavigator';
 
 export default function RootNavigator(){
     const {user} = useContext(AuthContext);
@@ -23,14 +24,14 @@ return (
     <NavigationContainer>
         {/* Tudo dentro daqui é gerido pelo sistema de navegação */}
 
-        {!user && <AdminNavigator />}
+        {!user && <AuthNavigator />}
         {/* Se não há user — mostra Login/Registo */}
 
-        {use?.tipo === 'estudante' && <EstudanteNavigator/>}
+        {user?.tipo === 'estudante' && <EstudanteNavigator/>}
 
         {user?.tipo === 'revisor' && <RevisorNavigator/>}
 
-        {user?.tipo === 'admim' && <AdminNavigator/>}
+        {user?.tipo === 'admim' && <AuthNavigador/>}
     </NavigationContainer>
 );
 

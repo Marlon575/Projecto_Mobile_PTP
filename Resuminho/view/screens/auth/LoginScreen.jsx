@@ -3,7 +3,7 @@ import {View,Text} from 'react-native';
 
 export default function LoginScreen (){
     return(
-        <View style= {{flex:1, justityContent: 'center', alighItems: 'center'}}>
+        <View style= {{flex:1, justifyContent: 'center', alignItems: 'center'}}>
             <Text>Login - em desenvolvimento</Text>
         </View>
     );

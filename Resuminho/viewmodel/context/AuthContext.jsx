@@ -1,7 +1,7 @@
 // Contexto global de autenticação
 // Partilha os dados do utilizador com toda a app
 
-import React, {createContext, use, useState} from "react";
+import React, {createContext, useState} from "react";
 // createContext — cria um "canal" de dados global
 // useState — guarda o estado do utilizador em memória
 
@@ -9,13 +9,13 @@ export const AuthContext = createContext();
 // AuthContext é o objecto que os outros ficheiros importam
 // para ler os dados do utilizador com useContext(AuthContext)
 
-export function AuthProvider ({childre}) {
+export function AuthProvider ({children}) {
 
     const [user, setUser] = useState(null);
     // user sempre começa por null= a niguem esta autenticado
     // Quando o utilizador fizer login, setUser recebe um objecto do utilizador
 
-    const login = (UserData) =>{
+    const login = (userData) =>{
         setUser(UserData);
         // Vai guardar os dados do utilizador a app indentifica e muda de navigador
     };
@@ -27,8 +27,9 @@ export function AuthProvider ({childre}) {
 
     return (
         <AuthContext.Provider value={{ user, login, logout}}>
-            { }
         {childre}
+            { }
+        
         </AuthContext.Provider>
     );
 
