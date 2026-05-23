@@ -1,60 +1,102 @@
-import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
+import React, { useState } from 'react';
+import {
+  View, Text, StyleSheet, ScrollView,
+  TouchableOpacity, KeyboardAvoidingView, Platform,
+} from 'react-native';
+import cores from '../../constants/cores';
+import fontes from '../../constants/fontes';
+import Input from '../../components/comum/Input';
+import Botao from '../../components/comum/Botao';
+import Alerta from '../../components/comum/Alerta';
+import useAuth from '../../../viewmodel/hooks/useAuth';
 
 export default function LoginScreen({ navigation }) {
-  const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const { fazerLogin, carregando, erro, errosForm, limparErros } = useAuth();
 
-  const handleLogin = () => {
-    console.log("Login:", email, senha);
+  const handleLogin = async () => {
+    const sucesso = await fazerLogin(email, password);
+    if (sucesso) navigation.replace('Main');
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Entrar</Text>
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+    >
+      <ScrollView contentContainerStyle={styles.conteudo} showsVerticalScrollIndicator={false}>
+        <View style={styles.cabecalho}>
+          <Text style={styles.logo}>📚</Text>
+          <Text style={styles.titulo}>Resuminho</Text>
+          <Text style={styles.subtitulo}>A plataforma de resumos da UJAC</Text>
+        </View>
 
-      <TextInput
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-        style={styles.input}
-      />
+        <View style={styles.formulario}>
+          <Alerta tipo="erro" mensagem={erro} onFechar={limparErros} />
 
-      <TextInput
-        placeholder="Senha"
-        value={senha}
-        onChangeText={setSenha}
-        secureTextEntry
-        style={styles.input}
-      />
+          <Input
+            label="Email"
+            placeholder="o.teu@email.com"
+            value={email}
+            onChangeText={setEmail}
+            keyboardType="email-address"
+            erro={errosForm.email}
+          />
+          <Input
+            label="Password"
+            placeholder="A tua password"
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry
+            erro={errosForm.password}
+          />
 
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Entrar</Text>
-      </TouchableOpacity>
+          <Botao
+            texto="Entrar"
+            onPress={handleLogin}
+            carregando={carregando}
+            icone="🔐"
+          />
 
-      <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-        <Text style={styles.link}>Criar conta</Text>
-      </TouchableOpacity>
-    </View>
+          <TouchableOpacity
+            style={styles.linkRegisto}
+            onPress={() => navigation.navigate('Registo')}
+          >
+            <Text style={styles.linkRegistoTexto}>
+              Não tens conta?{' '}
+              <Text style={styles.linkRegistoDestaque}>Regista-te aqui</Text>
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: "center", padding: 20 },
-  title: { fontSize: 28, fontWeight: "bold", marginBottom: 20 },
-  input: {
-    borderWidth: 1,
-    borderColor: "#ccc",
-    padding: 12,
-    borderRadius: 8,
-    marginBottom: 10,
+  container: { flex: 1, backgroundColor: cores.fundo },
+  conteudo: { flexGrow: 1, padding: 24, justifyContent: 'center' },
+  cabecalho: { alignItems: 'center', marginBottom: 40 },
+  logo: { fontSize: 64, marginBottom: 12 },
+  titulo: {
+    fontSize: fontes.display,
+    fontWeight: fontes.extrabold,
+    color: cores.primaria,
   },
-  button: {
-    backgroundColor: "#4b0073",
-    padding: 14,
-    borderRadius: 8,
-    marginTop: 10,
+  subtitulo: {
+    fontSize: fontes.normal,
+    color: cores.textoSecundario,
+    marginTop: 4,
+    textAlign: 'center',
   },
-  buttonText: { color: "#fff", textAlign: "center", fontWeight: "bold" },
-  link: { marginTop: 15, color: "#4b007a", textAlign: "center" },
+  formulario: {
+    backgroundColor: cores.fundoCartao,
+    borderRadius: 16,
+    padding: 24,
+    elevation: 2,
+  },
+  linkRegisto: { marginTop: 16, alignItems: 'center' },
+  linkRegistoTexto: { fontSize: fontes.normal, color: cores.textoSecundario },
+  linkRegistoDestaque: { color: cores.primaria, fontWeight: fontes.bold },
 });
