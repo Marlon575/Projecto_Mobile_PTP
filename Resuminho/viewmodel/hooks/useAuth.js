@@ -23,7 +23,7 @@ const fazerRegisto = async (nome, email, password, confirmar, extras = {}) => {
     return false;
     }
     setErrosForm({});
-    return await criar({ nome, email, password, ...extras });
+    return await criar({ nome, email, senha: password, ...extras });
 };
 
 const fazerLogout = async () => {

@@ -1,80 +1,68 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
-import cores from '../../constants/cores';
-import fontes from '../../constants/fontes';
+import React from 'react';
+import {
+TouchableOpacity, Text, ActivityIndicator, StyleSheet,
+} from 'react-native';
 
-export default function Input({
-label, placeholder, value, onChangeText,
-erro, secureTextEntry = false, keyboardType = 'default',
-autoCapitalize = 'none', multiline = false, editable = true,
+export default function Botao({
+texto,
+onPress,
+carregando = false,
+desativado = false,
+variante = 'primario',
+icone,
 }) {
-const [focado, setFocado] = useState(false);
-const [mostrarPassword, setMostrarPassword] = useState(false);
+const ePrimario = variante === 'primario';
+const eSecundario = variante === 'secundario';
 
 return (
-    <View style={styles.container}>
-    {label && <Text style={styles.label}>{label}</Text>}
-    <View style={[
-        styles.inputContainer,
-        focado && styles.inputFocado,
-        erro && styles.inputErro,
-        !editable && styles.inputDesativado,
-    ]}>
-        <TextInput
-        style={styles.input}
-        placeholder={placeholder}
-        placeholderTextColor={cores.textoDesativado}
-        value={value}
-        onChangeText={onChangeText}
-        secureTextEntry={secureTextEntry && !mostrarPassword}
-        keyboardType={keyboardType}
-        autoCapitalize={autoCapitalize}
-        multiline={multiline}
-        editable={editable}
-        onFocus={() => setFocado(true)}
-        onBlur={() => setFocado(false)}
-        />
-        {secureTextEntry && (
-        <TouchableOpacity onPress={() => setMostrarPassword(!mostrarPassword)}>
-            <Text style={styles.olho}>{mostrarPassword ? '🙈' : '👁️'}</Text>
-        </TouchableOpacity>
-        )}
-    </View>
-    {erro && <Text style={styles.erro}>{erro}</Text>}
-    </View>
+    <TouchableOpacity
+    style={[
+        styles.botao,
+        ePrimario && styles.primario,
+        eSecundario && styles.secundario,
+        (desativado || carregando) && styles.desativado,
+    ]}
+    onPress={onPress}
+    disabled={desativado || carregando}
+    activeOpacity={0.8}
+    >
+    {carregando ? (
+        <ActivityIndicator color="#FFFFFF" />
+    ) : (
+        <Text style={[styles.texto, eSecundario && styles.textoSecundario]}>
+        {icone ? `${icone} ${texto}` : texto}
+        </Text>
+    )}
+    </TouchableOpacity>
 );
 }
 
 const styles = StyleSheet.create({
-container: { marginBottom: 14 },
-label: {
-    fontSize: fontes.normal,
-    fontWeight: fontes.semibold,
-    color: cores.textoPrimario,
-    marginBottom: 6,
-},
-inputContainer: {
-    flexDirection: 'row',
+botao: {
+    paddingVertical: 14,
+    paddingHorizontal: 24,
+    borderRadius: 12,
     alignItems: 'center',
-    backgroundColor: cores.fundoCartao,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: cores.separador,
-    paddingHorizontal: 12,
+    justifyContent: 'center',
+    marginTop: 12,
 },
-inputFocado: { borderColor: cores.primaria },
-inputErro: { borderColor: cores.erro },
-inputDesativado: { backgroundColor: cores.fundo, opacity: 0.7 },
-input: {
-    flex: 1,
-    paddingVertical: 12,
-    fontSize: fontes.normal,
-    color: cores.textoPrimario,
+primario: {
+    backgroundColor: '#73057d',
 },
-olho: { fontSize: 18, padding: 4 },
-erro: {
-    fontSize: fontes.pequeno,
-    color: cores.erro,
-    marginTop: 4,
+secundario: {
+    backgroundColor: 'transparent',
+    borderWidth: 2,
+    borderColor: '#73057d',
+},
+desativado: {
+    opacity: 0.6,
+},
+texto: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: '700',
+},
+textoSecundario: {
+    color: '#73057d',
 },
 });

@@ -16,9 +16,8 @@ export default function LoginScreen({ navigation }) {
   const { fazerLogin, carregando, erro, errosForm, limparErros } = useAuth();
 
   const handleLogin = async () => {
-    const sucesso = await fazerLogin(email, password);
-    if (sucesso) navigation.replace('Main');
-  };
+  await fazerLogin(email, password);
+};
 
   return (
     <KeyboardAvoidingView

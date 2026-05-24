@@ -28,7 +28,7 @@ export default function AuthNavigator(){
             />
 
             <Stack.Screen
-            name="Register"
+            name="Registo"
             component={RegisterScreen}
             />
         </Stack.Navigator>

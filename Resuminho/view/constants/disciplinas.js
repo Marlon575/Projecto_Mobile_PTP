@@ -15,4 +15,4 @@ const disciplinas = [
   },
 ];
 
-module.exports = disciplinas;
+export default disciplinas;

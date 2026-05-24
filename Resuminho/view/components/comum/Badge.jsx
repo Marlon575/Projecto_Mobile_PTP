@@ -1,33 +1,68 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import {TouchableOpacity, Text, ActivityIndicator, StyleSheet,} from 'react-native';
+import cores from '../../constants/cores';
 import fontes from '../../constants/fontes';
-import { obterNivel } from '../../../viewmodel/utils/nivelEstudante';
 
-export default function Badge({ pontos = 0, tamanho = 'normal' }) {
-const nivel = obterNivel(pontos);
-const ePequeno = tamanho === 'pequeno';
+export default function Botao({
+texto,
+onPress,
+carregando = false,
+desativado = false,
+variante = 'primario',
+icone,
+}) {
+const ePrimario = variante === 'primario';
+const eSecundario = variante === 'secundario';
 
 return (
-    <View style={[styles.container, { backgroundColor: nivel.cor }, ePequeno && styles.containerPequeno]}>
-    <Text style={ePequeno ? styles.iconePequeno : styles.icone}>{nivel.icone}</Text>
-    <Text style={[styles.texto, ePequeno && styles.textoPequeno]}>{nivel.nome}</Text>
-    </View>
+    <TouchableOpacity
+    style={[
+        styles.botao,
+        ePrimario && styles.primario,
+        eSecundario && styles.secundario,
+        (desativado || carregando) && styles.desativado,
+    ]}
+    onPress={onPress}
+    disabled={desativado || carregando}
+    activeOpacity={0.8}
+    >
+    {carregando ? (
+        <ActivityIndicator color={ePrimario ? '#FFF' : cores.primaria} />
+    ) : (
+        <Text style={[styles.texto, eSecundario && styles.textoSecundario]}>
+        {icone ? `${icone} ${texto}` : texto}
+        </Text>
+    )}
+    </TouchableOpacity>
 );
 }
 
 const styles = StyleSheet.create({
-container: {
-    flexDirection: 'row',
+botao: {
+    paddingVertical: 14,
+    paddingHorizontal: 24,
+    borderRadius: 12,
     alignItems: 'center',
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 20,
-    alignSelf: 'flex-start',
-    gap: 4,
+    justifyContent: 'center',
+    marginTop: 12,
 },
-containerPequeno: { paddingHorizontal: 8, paddingVertical: 4 },
-icone: { fontSize: 16 },
-iconePequeno: { fontSize: 12 },
-texto: { color: '#FFFFFF', fontSize: fontes.normal, fontWeight: fontes.bold },
-textoPequeno: { fontSize: fontes.pequeno },
+primario: {
+    backgroundColor: cores.primaria,
+},
+secundario: {
+    backgroundColor: 'transparent',
+    borderWidth: 2,
+    borderColor: cores.primaria,
+},
+desativado: {
+    opacity: 0.6,
+},
+texto: {
+    color: '#FFFFFF',
+    fontSize: fontes.normal,
+    fontWeight: fontes.bold,
+},
+textoSecundario: {
+    color: cores.primaria,
+},
 });

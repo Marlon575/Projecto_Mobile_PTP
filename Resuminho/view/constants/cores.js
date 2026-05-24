@@ -10,7 +10,7 @@ const cores = {
   fundoEscuro: '#121212',     // fundo modo escuro
 
   // Texto
-  textoPrimario: '#d20000',   // texto principal
+  textoPrimario: '#212121',   // texto principal
   textoSecundario: '#757575', // texto secundário
   textoClaro: '#FFFFFF',      // texto sobre fundos escuros
   textoDesativado: '#BDBDBD', // texto desativado
@@ -28,4 +28,4 @@ const cores = {
   aviso: '#FF9800',           // mensagens de aviso
 };
 
-module.exports = cores;
+export default cores;

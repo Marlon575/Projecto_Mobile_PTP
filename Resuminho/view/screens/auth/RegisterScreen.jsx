@@ -19,9 +19,8 @@ export default function RegisterScreen({ navigation }) {
   const { fazerRegisto, carregando, erro, errosForm, limparErros } = useAuth();
 
   const handleRegisto = async () => {
-    const sucesso = await fazerRegisto(nome, email, password, confirmar, { ano });
-    if (sucesso) navigation.replace('Main');
-  };
+  await fazerRegisto(nome, email, password, confirmar, { ano });
+};
 
   return (
     <KeyboardAvoidingView

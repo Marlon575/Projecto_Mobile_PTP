@@ -81,4 +81,5 @@ const calcularProgresso = (pontos) => {
   return Math.round((progresso / intervalo) * 100);
 };
 
-module.exports = { niveis, pontosAccao, obterNivel, calcularProgresso };
+export { niveis, pontosAccao, obterNivel, calcularProgresso };
+export default niveis;

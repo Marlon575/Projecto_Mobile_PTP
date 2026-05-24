@@ -1,38 +1,29 @@
-// Este é o navigator raiz — decide qual navigator mostrar
-import React, {useContext} from 'react';
-// useContext — permite ler dados do AuthContext ( AS sessãos do utilizador)
-import {NavigationContainer} from '@react-navigation/native';
-// Só pode existir UM na app inteira — fica aqui no topo
-
-import {AuthContext} from '../../viewmodel/context/AuthContext'
-// AuthContext guarda os dados do utilizador que entrou na sessão
-
-import AuthNavigador from './AuthNavigator';
-// Navigator para utilizadores NÃO autenticados (Login, Registo)
-
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { View, ActivityIndicator } from 'react-native';
+import { useAuthContext } from '../../viewmodel/context/AuthContext';
+import AuthNavigator from './AuthNavigator';
 import EstudanteNavigator from './EstudanteNavigator';
 import RevisorNavigator from './RevisorNavigator';
 import AdminNavigator from './AdminNavigator';
-import AuthNavigator from './AuthNavigator';
 
-export default function RootNavigator(){
-    const {user} = useContext(AuthContext);
-    // Lê o objecto user do contexto
-  // user tem a forma: { _id, nome, email, tipo }
-  // tipo pode ser: 'estudante', 'revisor' ou 'admin'
+export default function RootNavigator() {
+const { utilizador, carregando } = useAuthContext();
+
+if (carregando) {
+    return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" color="#4b0073" />
+    </View>
+    );
+}
+
 return (
     <NavigationContainer>
-        {/* Tudo dentro daqui é gerido pelo sistema de navegação */}
-
-        {!user && <AuthNavigator />}
-        {/* Se não há user — mostra Login/Registo */}
-
-        {user?.tipo === 'estudante' && <EstudanteNavigator/>}
-
-        {user?.tipo === 'revisor' && <RevisorNavigator/>}
-
-        {user?.tipo === 'admim' && <AuthNavigador/>}
+    {!utilizador && <AuthNavigator />}
+    {utilizador?.role === 'estudante' && <EstudanteNavigator />}
+    {utilizador?.role === 'revisor' && <RevisorNavigator />}
+    {utilizador?.role === 'admin' && <AdminNavigator />}
     </NavigationContainer>
 );
-
 }

@@ -20,4 +20,4 @@ const fontes = {
   linhaEspacosa: 28,
 };
 
-module.exports = fontes;
+export default fontes;

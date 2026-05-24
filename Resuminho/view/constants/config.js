@@ -2,7 +2,7 @@ const config = {
   // URL base da API — muda para o IP da tua máquina quando testares
   // Com emulador Android usa 10.0.2.2
   // Com telemóvel real usa o IP local (ex: 192.168.1.x)
-  API_URL: 'http://10.0.2.2:3000',
+API_URL: 'https://evil-hats-sneeze.loca.lt',
 
   // Tempo limite de resposta em milissegundos
   TIMEOUT: 10000,
@@ -21,4 +21,4 @@ const config = {
   CHAVE_UTILIZADOR: '@resuminho_utilizador',
 };
 
-module.exports = config;
+export default config;

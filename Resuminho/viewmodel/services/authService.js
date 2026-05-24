@@ -6,7 +6,7 @@ removerToken, removerUtilizador, limparTudo,
 
 const login = async (email, password) => {
 try {
-    const resposta = await api.post('/auth/login', { email, password });
+    const resposta = await api.post('/auth/login', { email, senha: password });
     const { token, utilizador } = resposta.data;
     await guardarToken(token);
     await guardarUtilizador(utilizador);
