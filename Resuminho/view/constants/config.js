@@ -2,7 +2,7 @@ const config = {
   // URL base da API — muda para o IP da tua máquina quando testares
   // Com emulador Android usa 10.0.2.2
   // Com telemóvel real usa o IP local (ex: 192.168.1.x)
-API_URL: 'https://evil-hats-sneeze.loca.lt',
+API_URL: 'https://resuminho-api.onrender.com',
 
   // Tempo limite de resposta em milissegundos
   TIMEOUT: 10000,
