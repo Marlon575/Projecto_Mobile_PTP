@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { obterToken } from '../utils/armazenamento';
 
-const API_URL = 'https://board-score-camel-adware.trycloudflare.com';
+const API_URL = 'https://resuminho-api.onrender.com';
 
 const api = axios.create({
   baseURL: API_URL,

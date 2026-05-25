@@ -14,14 +14,15 @@ meusResumos,
 // GET /resumos — qualquer utilizador autenticado pode listar
 router.get('/', autenticar, listarResumos);
 
-router.get('/meus', autenticar, verificarRole('revisor', 'admin'), meusResumos);
+
+// Qualquer utilizador autenticado vê os seus resumos
+router.get('/meus', autenticar, meusResumos);
 
 // GET /resumos/:id — qualquer utilizador autenticado
 router.get('/:id', autenticar, obterResumo);
 
-// POST /resumos — só revisores podem publicar
-// upload.single('pdf') — processa o ficheiro PDF enviado no campo "pdf"
-router.post('/', autenticar, verificarRole('revisor', 'admin'), upload.single('pdf'), publicarResumo);
+// Qualquer utilizador autenticado pode submeter
+router.post('/', autenticar, upload.single('pdf'), publicarResumo);
 
 // PUT /resumos/:id/download — qualquer utilizador autenticado
 router.put('/:id/download', autenticar, registarDownload);
