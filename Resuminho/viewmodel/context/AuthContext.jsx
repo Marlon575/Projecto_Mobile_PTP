@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { login, registar, logout, verificarToken } from '../services/authService';
-import { obterUtilizador } from '../utils/armazenamento';
 
 const AuthContext = createContext();
 
@@ -10,18 +9,19 @@ const [token, setToken] = useState(null);
 const [carregando, setCarregando] = useState(true);
 const [erro, setErro] = useState(null);
 
-  // Verifica se há sessão guardada ao iniciar a app
 useEffect(() => {
     verificarSessao();
 }, []);
 
+
 const verificarSessao = async () => {
     try {
     setCarregando(true);
-    const utilizadorGuardado = await obterUtilizador();
     const dados = await verificarToken();
-    if (dados && utilizadorGuardado) {
-        setUtilizador(utilizadorGuardado);
+    if (dados?.utilizador) {
+        setUtilizador(dados.utilizador); // ← dados frescos com role correcto
+    } else {
+        setUtilizador(null);
     }
     } catch (err) {
     setUtilizador(null);

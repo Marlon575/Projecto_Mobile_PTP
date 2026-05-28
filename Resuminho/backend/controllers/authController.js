@@ -5,7 +5,7 @@ const { criarToken } = require('../config/jwt');
 // POST /auth/registar
 const registar = async (req, res) => {
 try {
-    const { nome, email, senha, curso, ano } = req.body;
+    const { nome, email, senha, curso, ano, role } = req.body;
 
     // Verifica se já existe um utilizador com este email
     const jaExiste = await Usuario.findOne({ email });
@@ -14,7 +14,7 @@ try {
     }
 
     // Cria o utilizador — a senha é encriptada automaticamente pelo model
-    const utilizador = await Usuario.create({ nome, email, senha, curso, ano });
+    const utilizador = await Usuario.create({ nome, email, senha, curso, ano, role });
 
     // Cria o token JWT com o id e role do utilizador
     const token = criarToken({ id: utilizador._id, role: utilizador.role });
